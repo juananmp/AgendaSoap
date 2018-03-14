@@ -4,6 +4,9 @@
     <service name="ServiciosBasicos">
       <implementation-class>Servlet.ServiciosBasicos</implementation-class>
     </service>
+    <service name="ValidarXSD_DTD">
+      <implementation-class>Servlet.ValidarXSD_DTD</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

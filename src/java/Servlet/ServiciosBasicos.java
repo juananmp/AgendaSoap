@@ -44,55 +44,7 @@ public class ServiciosBasicos {
     /**
      * This is a sample web service operation
      */
-    @WebMethod(operationName = "ValidarXSD")
-    public String validarXSD() {
-String txt = "Juanan";
-        try {
 
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = schemaFactory.newSchema(xsdFile);
-            Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(file));
-            txt = (file + " is valid against the " + xsdFile + " Schema");
-        } catch (SAXException ex) {
-            txt = (file + " is not valid against the " + xsdFile + " Schema");
-            Logger.getLogger(ServiciosBasicos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ServiciosBasicos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // return (file + " is valid against the " + xsdFile + " Schema");
-        return txt;
-    }
-
-    @WebMethod(operationName = "Validar_DTD")
-    public String validarDTD() {
-String txt = "Juanan";
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            //In this case we are creating a different ErrorHandler, if not we do like the well-formed Checker+
-            CustomErrorHandler customErrorHandler = new CustomErrorHandler();
-            dBuilder.setErrorHandler(customErrorHandler);
-
-            Document doc = dBuilder.parse(file);
-
-            if (customErrorHandler.isValid()) {
-                txt = (file + " was valid!");
-            } else {
-                txt = (file + " was not valid!");
-            }
-        } catch (ParserConfigurationException ex) {
-            System.out.println(file + " error while parsing!");
-            Logger.getLogger(ServiciosBasicos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            System.out.println(file + " was not well-formed!");
-            Logger.getLogger(ServiciosBasicos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            System.out.println(file + " was not accesible!");
-            Logger.getLogger(ServiciosBasicos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return txt;
-    }
     @WebMethod(operationName = "MostrarAgenda")
     public Agenda mostrarAgenda() throws JAXBException {  
         UnMarshall u = new UnMarshall();
@@ -101,5 +53,20 @@ String txt = "Juanan";
     
     }
 
+    @WebMethod(operationName = "MostarPersona")
+    public Persona mostrarPersona(String nombre) throws JAXBException {  
+        UnMarshall u = new UnMarshall();
+        u.UnMarshallAgenda(file);
+        Persona p = null;
+        for(int i=0;i<nuestraAgenda.persona.size();i++){
+            if(nuestraAgenda.persona.get(i).getName().equals(nombre)){
+                p = nuestraAgenda.getPersona().get(i);
+                break;
+            }
+        }
+        return p;
+    
+    }
+    
   
 }
