@@ -8,6 +8,7 @@ package Servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
@@ -33,9 +34,11 @@ import org.xml.sax.SAXException;
  *
  * @author janto
  */
+
 @WebService(serviceName = "ServiciosBasicos")
 public class ServiciosBasicos {
 
+     static Scanner scanner = new Scanner(System.in);
     File file = new File("Agenda.xml");
 
     File xsdFile = new File("ValidarAgenda.xsd");
@@ -51,6 +54,14 @@ public class ServiciosBasicos {
         u.UnMarshallAgenda(file);
         return nuestraAgenda;
     
+    }
+    
+    @WebMethod(operationName = "CrearContacto")
+    public void crearContacto(Persona p) {
+       nuestraAgenda.setPersona(p);
+       Marshall m = new Marshall();
+       m.MarshallAgenda(nuestraAgenda);
+       
     }
 
     @WebMethod(operationName = "MostarPersona")
