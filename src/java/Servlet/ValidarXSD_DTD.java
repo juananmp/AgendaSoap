@@ -37,6 +37,10 @@ public class ValidarXSD_DTD{
     @WebMethod(operationName = "ValidarXSD")
     public String validarXSD() {
         String txt = "Juanan";
+          File schemaFile = new File("ValidarAgenda.xsd");
+        if(!schemaFile.exists()){
+            CrearXsd.crear();
+        }
         try {
 
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

@@ -4,9 +4,17 @@
         <servlet-name>ServiciosBasicos</servlet-name>
         <servlet-class>Servlet.ServiciosBasicos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CrearXsd</servlet-name>
+        <servlet-class>Servlet.CrearXsd</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServiciosBasicos</servlet-name>
         <url-pattern>/ServiciosBasicos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearXsd</servlet-name>
+        <url-pattern>/CrearXsd</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
